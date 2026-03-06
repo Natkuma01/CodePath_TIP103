@@ -144,3 +144,69 @@ group_sizes2 = [2, 1, 3, 3, 3, 2]
 print("================ Problem 6 ====================")
 print(organize_pirate_crew(group_sizes1))
 print(organize_pirate_crew(group_sizes2)) 
+
+
+
+# ================ Problem 7 ====================
+# iterate the char in map1
+# convert map2 to a list
+# if that char is in map2, remove the char
+# return the lengtht of the list map2
+def min_steps_to_match_maps(map1, map2):
+    lst_map2 = list(map2)
+    for char in map1:
+        if char in lst_map2:
+            lst_map2.remove(char)
+    return len(lst_map2)
+
+
+print("================ Problem 7 ====================")
+map1_1 = "bab"
+map2_1 = "aba"
+map1_2 = "treasure"
+map2_2 = "huntgold"
+map1_3 = "anagram"
+map2_3 = "mangaar"
+
+print(min_steps_to_match_maps(map1_1, map2_1))
+print(min_steps_to_match_maps(map1_2, map2_2))
+print(min_steps_to_match_maps(map1_3, map2_3))
+
+
+
+
+# ================ Problem 8 ====================
+# U - the logs [0, 5] ==> pirate#0 acted at 5 min
+#   - that is 1 unique PAM (pirate action minute)
+#   - return the result [#pirates have 1 unique PAM, #pirate have 2 unique PAM, .....]
+#   - k is the length of the result
+# P - set up empty dict
+#   - loop through logs
+#   - if item[0] not in the dict, set item[0] as the key of dict, item[1] is the value (a list)
+#   - else append the value into the same key
+#   - create the answer = [] 0*k
+#   - for value in the dict, get the dict value len
+#   - answer[len_value] = 1 (if answer[len_value] == 0)
+#   - otherwise answer[len_value] += 1, return the answer list
+def counting_pirates_action_minutes(logs, k):
+    action_min = {}
+    for item in logs:
+        if item[0] not in action_min:
+            action_min[item[0]] = [item[1]]
+        else:
+            action_min[item[0]].append(item[1])
+    answer = [0] * k
+    for value in action_min.values():
+        value = set(value)
+        answer[len(value)-1] += 1
+    return answer
+
+
+print("================ Problem 8 ====================")
+logs1 = [[0, 5], [1, 2], [0, 2], [0, 5], [1, 3]]
+k1 = 5
+logs2 = [[1, 1], [2, 2], [2, 3]]
+k2 = 4
+
+print(counting_pirates_action_minutes(logs1, k1)) 
+print(counting_pirates_action_minutes(logs2, k2))
