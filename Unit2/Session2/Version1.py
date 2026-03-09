@@ -95,20 +95,28 @@ print(organize_exhibition(collection2))
 #   - loop through each value and add "key" + value -> a string
 def subdomain_visits(cpdomains):
     dict = {}
+
     for item in cpdomains:
         parts = item.split(" ")
-        num = parts[0]
+        num = int(parts[0])
         url = parts[1]
-        urls = [parts[1]]
-        while "." in url:
-            dot_index = url.index(".")
-            sub_str = url[dot_index+1:]
-            urls.append(sub_str)
-            url = sub_str
-    return urls
-        
+        if url not in dict:
+            dict[url] =  num
+            while "." in url:
+                dot_index = url.index(".")
+                sub_url = url[dot_index+1:]
+                dict[sub_url] = dict.get(sub_url, 0) + num
+                url = sub_url
+        else:
+            dict[url] += num
+    
+    res = []
+    for key, value in dict.items():
+        temp_str = str(value) + " " + key
+        res.append(temp_str)
+        temp_str = ""
 
-
+    return res
 
 print("================ Problem 4 ====================")
 cpdomains1 = ["9001 modern.artmuseum.com"]
@@ -117,3 +125,9 @@ cpdomains2 = ["900 abstract.gallery.com", "50 impressionism.com",
 
 print(subdomain_visits(cpdomains1))
 print(subdomain_visits(cpdomains2))
+
+
+# ================ Problem 5 ====================
+
+
+print("================ Problem 5 ====================")
