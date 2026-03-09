@@ -17,9 +17,9 @@ treasure_map2 = {
     "Lagoon": 15,
     "Island Peak": 5
 }
-
-# print(total_treasures(treasure_map1)) 
-# print(total_treasures(treasure_map2)) 
+print("================ Problem 1 ====================")
+print(total_treasures(treasure_map1)) 
+print(total_treasures(treasure_map2)) 
 
 
 # ================ Problem 2 ====================
