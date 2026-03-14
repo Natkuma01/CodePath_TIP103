@@ -99,20 +99,27 @@ print(append_animals("fish", "bird"))
 # ================ Problem 5 ====================
 # U - grouping all letter, Ex. a can be in group one, cannot be in group 2
 #   - Ex. ababcbaca / defegde / hijhklij - [9, 7, 8]
+# P - make dictionary to find all last index of each char
+#   - see the current index it the largest number
+#   - set the largest to "end", and if the current index == end, 
+#   - append the (end - start) + 1 to an empty list 
+#   - start = i + 1
 def group_animals_by_habitat(habitats):
     last_index = {}
-    for i, value in enumerate (habitats):
+
+    for i, value in enumerate(habitats):
         last_index[value] = i
-
-    last_index = sorted(last_index.items(), key=lambda item:item[1])
-
-    last_letter = []
-
-    for i in range (len(last_index)):
-        if i != 0 and last_index[i][1] - last_index[i-1][1] > 2:
-            last_letter.append(last_index[i-1])
-
     
+    res = []
+    start, end = 0, 0
+
+    for i, value in enumerate(habitats):
+        end = max(end, last_index[value])
+        if i == end:
+            res.append(end-start + 1)
+            start = i + 1
+    return res
+   
 
 print("================ Problem 5 ====================")
 print(group_animals_by_habitat("ababcbacadefegdehijhklij")) 
