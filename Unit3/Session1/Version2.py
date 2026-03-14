@@ -1,4 +1,5 @@
 import heapq
+from collections import deque
 # ================ Problem 1 ====================
 def predictAdoption_victory(votes):
     if votes.count('C') > votes.count('D'):
@@ -124,3 +125,29 @@ def group_animals_by_habitat(habitats):
 print("================ Problem 5 ====================")
 print(group_animals_by_habitat("ababcbacadefegdehijhklij")) 
 print(group_animals_by_habitat("eccbbbbdec"))
+
+
+# ================ Problem 6 ====================
+# U - adopt has to be in order
+# P - Stack
+#   - create a stack, keep put element in, then check the last num in the stack == first num in adopted?
+#   - if yes? pop stack, check the next num in adopt
+#   - if no, check the rest of the list, if in the list, keep stack the next element
+#   - if the list empty, return false
+def validate_shelter_sequence(admitted, adopted):
+    stack = []
+
+    i, j = 0, 0
+    while i < len(admitted):
+        stack.append(admitted[i])
+        i += 1
+        while j < len(adopted) and stack[-1] == adopted[j]:
+            stack.pop()
+            j += 1
+    
+    return not stack
+                
+
+print("================ Problem 6 ====================")
+print(validate_shelter_sequence([1,2,3,4,5], [4,5,3,2,1]))
+print(validate_shelter_sequence([1,2,3,4,5], [4,3,5,1,2])) 
