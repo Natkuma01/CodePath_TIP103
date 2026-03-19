@@ -44,26 +44,73 @@ print(orbs2)
 
 
 # ================ Problem 3 ====================
+def match_buyers_and_sellers(buyers, sellers):
+    sorted_buyers = sorted(buyers)
+    sorted_sellers = sorted(sellers)
+    count = 0
+    
+    for buy_price in sorted_buyers:
+        i = 0
+        while i < len(sorted_sellers):
+            if buy_price >= sorted_sellers[i]:
+                count += 1
+                sorted_sellers.remove(sorted_sellers[i])
+            else:
+                i += 1
+    return count
 
 
 print("================ Problem 3 ====================")
+buyers1 = [4, 7, 9]
+sellers1 = [8, 2, 5, 8]
+print(match_buyers_and_sellers(buyers1, sellers1)) 
+
+buyers2 = [1, 1, 1]
+sellers2 = [10]
+print(match_buyers_and_sellers(buyers2, sellers2))
 
 
 
+# ================ Problem 4 ====================
+def maximum_value(items, x, y):
+    # x = "ab"
+    # y = "ba"
+    larger = max(x, y)
+    items_lst = list(items)
+    i, j = 0, 1
+    count_x, count_y = 0, 0
+    if larger == y:
+        while j < len(items_lst):
+            if items_lst[i] == 'b' and items_lst[j] == 'a':
+                count_y += 1
+                items_lst.pop(i)
+                items_lst.pop(j)
+            else:
+                i += 1
+                j += 1
+        
+        if "ab" in "".join(items_lst):
+            count_x += 1
+    else:
+        while j < len(items_lst):
+            if items_lst[i] == 'a' and items_lst[j] == 'b':
+                count_y += 1
+                items_lst.pop(i)
+                items_lst.pop(j)
+            else:
+                i += 1
+                j += 1
+        if "ba" in "".join(items_lst):
+            count_x += 1
+    return x*count_x + y*count_y
+        
+            
 
+print("================ Problem 4 ====================")
+s1 = "cdbcbbaaabab"
+x1, y1 = 4, 5
+print(maximum_value(s1, x1, y1))
 
-# ==================
-def rotate_matrix(matrix):
-    res = []
-    for i in range (len(matrix)):
-        temp = []
-        for j in range(len(matrix[0])):
-            temp.append(matrix[j][i])
-        res.append(temp[::-1])
-    return res
-
-matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-print(rotate_matrix(matrix))
-# 20 10 00
-# 21 11 01
-# 22 12 02
+s2 = "aabbaaxybbaabb"
+x2, y2 = 5, 4
+print(maximum_value(s2, x2, y2)) 
