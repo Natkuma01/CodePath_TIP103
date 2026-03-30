@@ -143,26 +143,63 @@ def print_linked_list(head):
         current = current.next
 
 def remove_nth_from_end(head, n):
-    curr = head
-    count = 1
-    while curr:
-        curr = curr.next
-        count += 1
+    dummy = Node (0, head)
+    slow = dummy
+    fast = dummy
 
-    n = count - n
-    
-    i = 0
-    curr = head
-    while i < n and curr.next:
-        curr = curr.next
-        i += 1
-    curr.next = None
+    for _ in range (n):
+        fast = fast.next
 
-    return head
+    while fast.next:
+        slow = slow.next
+        fast = fast.next
+
+    slow.next = slow.next.next
+
+    return dummy.next
+
 print("================ Problem 5 ====================")
 head1 = Node("apple", Node("cherry", Node("orange", Node("peach", Node("pear")))))
 head2 = Node("Rainbow Trout", Node("Ray"))
 head3 = Node("Rainbow Stag")
 print_linked_list(remove_nth_from_end(head1, 2))
-# print_linked_list(remove_nth_from_end(head2, 1))
-# print_linked_list(remove_nth_from_end(head3, 1))
+print_linked_list(remove_nth_from_end(head2, 1))
+print_linked_list(remove_nth_from_end(head3, 1))
+
+
+
+# ================ Problem 6 ====================
+class Node:
+	def __init__(self, value, next=None):
+		self.value = value
+		self.next = next
+
+# For testing
+def print_linked_list(head):
+    current = head
+    while current:
+        print(current.value, end=" -> " if current.next else "\n")
+        current = current.next
+        
+def reverse_first_k(head, k):
+    prev = None
+    curr = head
+    count = 0
+
+    while curr and count < k:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node
+        count += 1
+
+    head.next = curr
+
+    return prev
+    
+    
+
+print("================ Problem 6 ====================")
+head = Node("apple", Node("cherry", Node("orange", Node("peach", Node("pear")))))
+
+print_linked_list(reverse_first_k(head, 3))
