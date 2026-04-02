@@ -162,6 +162,7 @@ print(middle_match(tournament_tracks, "Bowser Castle"))
 
 
 # ================ Problem 5 ====================
+# reverse linked list
 class Node:
     def __init__(self, value, next=None):
         self.value = value
@@ -195,6 +196,7 @@ print_linked_list(reverse(kart_choices))
 
 
 # ================ Problem 6 ====================
+# check if the head node value is same as the tail node value
 class Node:
     def __init__(self, value, next=None):
         self.value = value
