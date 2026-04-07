@@ -222,6 +222,7 @@ else:
 
 
 # ================ Problem 5 ====================
+# 1 -> 8 -> 9      ex. 189 * 2 = 378    3 -> 7 -> 8
 class Node:
 	def __init__(self, value, next=None):
 		self.value = value
@@ -263,3 +264,11 @@ monthly_listeners2 = Node(9, Node(9, Node(9))) # 999
 
 print_linked_list(double_listeners(monthly_listeners1))
 print_linked_list(double_listeners(monthly_listeners2))
+
+
+#### ========= Reversed a Linked List ========= ####
+# prev = None
+# curr = head
+# while curr:
+#     prev, curr.next, curr = curr, prev, curr.next
+    
